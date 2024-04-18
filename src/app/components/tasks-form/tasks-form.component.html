@@ -1,0 +1,73 @@
+<h1 mat-dialog-title>Crear Nueva Tarea</h1>
+<div mat-dialog-content>
+  <form class="form" [formGroup]="taskForm">
+    <div class="columna">
+      <mat-form-field class="title">
+        <input matInput name="titulo" formControlName="title" placeholder="Título" required />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          formControlName="dueDate"
+          name="fechaVencimiento"
+          placeholder="Fecha de vencimiento"
+          required
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="columna">
+      <mat-form-field>
+        <mat-label>Prioridad</mat-label>
+        <mat-select formControlName="priority">
+          <mat-option value="alta">Alta</mat-option>
+          <mat-option value="baja">Baja</mat-option>
+          <mat-option value="media">Media</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Estado</mat-label>
+        <mat-select formControlName="state">
+          <mat-option [value]="1">Pendiente</mat-option>
+          <mat-option [value]="2" *ngIf="task">Completado</mat-option>
+        </mat-select>
+      </mat-form-field>
+      
+    </div>
+    <mat-form-field>
+      <mat-label>Etiquetas</mat-label>
+      <mat-chip-grid #chipGrid formControlName="tags" >
+        <mat-chip-row *ngFor="let tag of tags" (removed)="removeTag(tag)">
+          {{tag}}
+          <button matChipRemove>
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip-row>
+      </mat-chip-grid>
+      <input placeholder="Ingresa etiqueta y presiona enter..."
+              [matChipInputFor]="chipGrid"
+              (matChipInputTokenEnd)="add($event)"/>
+    </mat-form-field>
+    <mat-form-field>
+      <textarea
+        matInput
+        name="descripcion"
+        formControlName="description"
+        placeholder="Descripción"
+        required
+      ></textarea>
+    </mat-form-field>
+  </form>
+</div>
+<mat-dialog-actions align="end">
+  <div class="btn-save">
+    <button mat-raised-button (click)="saveTask()" color="primary">
+      Guardar
+    </button>
+    <button mat-raised-button (click)="close()">
+      Cancelar
+    </button>
+  </div>
+</mat-dialog-actions>

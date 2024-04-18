@@ -1,0 +1,39 @@
+mat-card {
+  margin-right: 20px;
+  margin-bottom: 20px;
+  width: 422px;
+}
+
+.prioridad {
+  background-color: yellow;
+  padding: 5px;
+  border-radius: 5px;
+  position: relative;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+}
+
+.mat-mdc-card-header {
+  display: flex;
+  padding: 16px 0 16px 16px;
+}
+mat-card-header {
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 820px) {
+  mat-card {
+    width: 355px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  mat-card {
+    margin-left: 20px;
+    margin-right: 0;
+    width: 394px;
+  }
+}
